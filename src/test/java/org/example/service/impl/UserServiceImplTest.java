@@ -1,6 +1,7 @@
 package org.example.service.impl;
 
 import org.example.dto.UserDto;
+import org.example.dto.mq_dto.RegistrationDto;
 import org.example.entity.User;
 import org.example.exception.UserNotFoundException;
 import org.example.mapper.UserMapper;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.example.message.ErrorMessage.USER_NOT_FOUND;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith({MockitoExtension.class, InstancioExtension.class})
@@ -67,5 +69,16 @@ class UserServiceImplTest {
         assertThatThrownBy(() -> userService.findUserByIdInDatabase(user.getId()))
                 .isInstanceOf(UserNotFoundException.class)
                 .hasMessage(USER_NOT_FOUND.formatWith(user.getId()));
+    }
+
+    @ParameterizedTest
+    @InstancioSource
+    void shouldCreateUserFromRegistrationDto(RegistrationDto registrationDto, User user) {
+        when(userMapper.mapRegistrationDtoToUser(registrationDto))
+                .thenReturn(user);
+
+        userService.createUserFromRegistrationDto(registrationDto);
+
+        verify(userRepository).saveAndFlush(user);
     }
 }

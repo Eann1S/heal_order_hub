@@ -1,6 +1,7 @@
 package org.example.mapper;
 
 import org.example.dto.UserDto;
+import org.example.dto.mq_dto.RegistrationDto;
 import org.example.entity.User;
 import org.instancio.junit.InstancioExtension;
 import org.instancio.junit.InstancioSource;
@@ -29,5 +30,15 @@ class UserMapperTest {
         assertThat(userDto)
                 .extracting(UserDto::id, UserDto::email, UserDto::username, UserDto::contactsMap)
                 .containsExactly(user.getId(), user.getEmail(), user.getUsername(), user.getContactsMap());
+    }
+
+    @ParameterizedTest
+    @InstancioSource
+    void shouldMapRegistrationDtoToUser(RegistrationDto dto) {
+        User user = userMapper.mapRegistrationDtoToUser(dto);
+
+        assertThat(user)
+                .extracting(User::getId, User::getEmail, User::getUsername)
+                .containsExactly(dto.id(), dto.email(), dto.username());
     }
 }

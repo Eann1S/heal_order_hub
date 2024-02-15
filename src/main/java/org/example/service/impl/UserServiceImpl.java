@@ -2,6 +2,7 @@ package org.example.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.UserDto;
+import org.example.dto.mq_dto.RegistrationDto;
 import org.example.entity.User;
 import org.example.exception.UserNotFoundException;
 import org.example.mapper.UserMapper;
@@ -26,5 +27,11 @@ public class UserServiceImpl implements UserService {
     public User findUserByIdInDatabase(String id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @Override
+    public void createUserFromRegistrationDto(RegistrationDto registrationDto) {
+        User user = userMapper.mapRegistrationDtoToUser(registrationDto);
+        userRepository.saveAndFlush(user);
     }
 }
