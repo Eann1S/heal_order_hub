@@ -1,7 +1,8 @@
 package org.example.service.impl;
 
 import org.example.dto.UserDto;
-import org.example.dto.mq_dto.RegistrationDto;
+import org.example.dto.mq_dto.RegisterDto;
+import org.example.dto.request.ContactsUpdateRequest;
 import org.example.entity.User;
 import org.example.exception.UserNotFoundException;
 import org.example.mapper.UserMapper;
@@ -73,12 +74,25 @@ class UserServiceImplTest {
 
     @ParameterizedTest
     @InstancioSource
-    void shouldCreateUserFromRegistrationDto(RegistrationDto registrationDto, User user) {
-        when(userMapper.mapRegistrationDtoToUser(registrationDto))
+    void shouldCreateUserFromRegistrationDto(RegisterDto registerDto, User user) {
+        when(userMapper.mapRegistrationDtoToUser(registerDto))
                 .thenReturn(user);
 
-        userService.createUserFromRegistrationDto(registrationDto);
+        userService.createUserFromRegistrationDto(registerDto);
 
         verify(userRepository).saveAndFlush(user);
+    }
+
+    @ParameterizedTest
+    @InstancioSource
+    void updateUserContactsById(User user, User updatedUser, ContactsUpdateRequest request) {
+        when(userRepository.findById(user.getId()))
+                .thenReturn(Optional.of(user));
+        when(userMapper.updateUserContacts(request, user))
+                .thenReturn(updatedUser);
+
+        userService.updateUserContactsById(user.getId(), request);
+
+        verify(userRepository).saveAndFlush(updatedUser);
     }
 }

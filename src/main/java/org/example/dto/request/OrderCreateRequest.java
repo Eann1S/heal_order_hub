@@ -1,6 +1,6 @@
 package org.example.dto.request;
 
-public record OrderCreationRequest(
+public record OrderCreateRequest(
         String ownerId,
         String text,
         int serviceCost

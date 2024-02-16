@@ -13,5 +13,5 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "kafka.topics")
 public class KafkaTopicConfig {
 
-    private String registrationTopic;
+    private String userRegisterTopic;
 }

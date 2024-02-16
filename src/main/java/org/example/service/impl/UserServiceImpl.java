@@ -2,7 +2,8 @@ package org.example.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.UserDto;
-import org.example.dto.mq_dto.RegistrationDto;
+import org.example.dto.mq_dto.RegisterDto;
+import org.example.dto.request.ContactsUpdateRequest;
 import org.example.entity.User;
 import org.example.exception.UserNotFoundException;
 import org.example.mapper.UserMapper;
@@ -30,8 +31,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUserFromRegistrationDto(RegistrationDto registrationDto) {
-        User user = userMapper.mapRegistrationDtoToUser(registrationDto);
+    public void createUserFromRegistrationDto(RegisterDto registerDto) {
+        User user = userMapper.mapRegistrationDtoToUser(registerDto);
         userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public void updateUserContactsById(String id, ContactsUpdateRequest updateRequest) {
+        User user = findUserByIdInDatabase(id);
+        User updatedUser = userMapper.updateUserContacts(updateRequest, user);
+        userRepository.saveAndFlush(updatedUser);
     }
 }

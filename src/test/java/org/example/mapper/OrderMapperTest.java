@@ -2,7 +2,7 @@ package org.example.mapper;
 
 import org.example.dto.OrderDto;
 import org.example.dto.UserDto;
-import org.example.dto.request.OrderCreationRequest;
+import org.example.dto.request.OrderCreateRequest;
 import org.example.entity.Order;
 import org.example.entity.User;
 import org.example.mapper.qualifier.owner.OwnerQualifier;
@@ -46,7 +46,7 @@ class OrderMapperTest {
 
     @ParameterizedTest
     @InstancioSource
-    void shouldMapOrderCreationRequestToOrder(OrderCreationRequest request, User owner) {
+    void shouldMapOrderCreationRequestToOrder(OrderCreateRequest request, User owner) {
         when(ownerQualifier.findOwnerById(request.ownerId()))
                 .thenReturn(owner);
 

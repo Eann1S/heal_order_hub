@@ -1,6 +1,6 @@
 package org.example.listener;
 
-import org.example.dto.mq_dto.RegistrationDto;
+import org.example.dto.mq_dto.RegisterDto;
 import org.example.service.UserService;
 import org.instancio.junit.InstancioExtension;
 import org.instancio.junit.InstancioSource;
@@ -27,9 +27,9 @@ class KafkaUserListenerTest {
 
     @ParameterizedTest
     @InstancioSource
-    void shouldCreateUserFromRegisterMessage(RegistrationDto registrationDto) {
-        kafkaUserListener.createUserFromRegisterMessage(GSON.toJson(registrationDto));
+    void shouldCreateUserFromRegisterMessage(RegisterDto registerDto) {
+        kafkaUserListener.createUserFromRegisterMessage(GSON.toJson(registerDto));
 
-        verify(userService).createUserFromRegistrationDto(registrationDto);
+        verify(userService).createUserFromRegistrationDto(registerDto);
     }
 }

@@ -27,4 +27,4 @@ spring:
 
 kafka:
   topics:
-    registration-topic: registration-topic
+    user-register-topic: user-regiser-topic

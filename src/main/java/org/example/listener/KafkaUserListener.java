@@ -2,7 +2,7 @@ package org.example.listener;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.mq_dto.RegistrationDto;
+import org.example.dto.mq_dto.RegisterDto;
 import org.example.service.UserService;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -16,10 +16,10 @@ public class KafkaUserListener {
 
     private final UserService userService;
 
-    @KafkaListener(topics = "#{kafkaTopicConfig.getUserUpdateTopic()}")
+    @KafkaListener(topics = "#{kafkaTopicConfig.getUserRegisterTopic()}")
     public void createUserFromRegisterMessage(String registerMessage) {
         log.info("received register message {}", registerMessage);
-        RegistrationDto registrationDto = GSON.fromJson(registerMessage, RegistrationDto.class);
-        userService.createUserFromRegistrationDto(registrationDto);
+        RegisterDto registerDto = GSON.fromJson(registerMessage, RegisterDto.class);
+        userService.createUserFromRegistrationDto(registerDto);
     }
 }

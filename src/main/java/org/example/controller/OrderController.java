@@ -2,7 +2,7 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.OrderDto;
-import org.example.dto.request.OrderCreationRequest;
+import org.example.dto.request.OrderCreateRequest;
 import org.example.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/order")
-    public ResponseEntity<String> createOrder(OrderCreationRequest request) {
+    public ResponseEntity<String> createOrder(OrderCreateRequest request) {
         orderService.createOrder(request);
         return ResponseEntity.ok(ORDER_CREATED.getMessage());
     }

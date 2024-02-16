@@ -1,7 +1,7 @@
 package org.example.mapper;
 
 import org.example.dto.OrderDto;
-import org.example.dto.request.OrderCreationRequest;
+import org.example.dto.request.OrderCreateRequest;
 import org.example.entity.Order;
 import org.example.mapper.qualifier.owner.OwnerById;
 import org.example.mapper.qualifier.owner.OwnerQualifier;
@@ -19,5 +19,5 @@ public interface OrderMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "owner", source = "ownerId", qualifiedBy = OwnerById.class)
-    Order mapOrderCreationRequestToOrder(OrderCreationRequest request);
+    Order mapOrderCreationRequestToOrder(OrderCreateRequest request);
 }

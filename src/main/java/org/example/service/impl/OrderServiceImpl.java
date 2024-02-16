@@ -2,7 +2,7 @@ package org.example.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.OrderDto;
-import org.example.dto.request.OrderCreationRequest;
+import org.example.dto.request.OrderCreateRequest;
 import org.example.entity.Order;
 import org.example.exception.OrderNotFoundException;
 import org.example.mapper.OrderMapper;
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void createOrder(OrderCreationRequest request) {
+    public void createOrder(OrderCreateRequest request) {
         Order order = orderMapper.mapOrderCreationRequestToOrder(request);
         orderRepository.saveAndFlush(order);
     }

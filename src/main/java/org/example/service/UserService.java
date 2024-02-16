@@ -1,7 +1,8 @@
 package org.example.service;
 
 import org.example.dto.UserDto;
-import org.example.dto.mq_dto.RegistrationDto;
+import org.example.dto.mq_dto.RegisterDto;
+import org.example.dto.request.ContactsUpdateRequest;
 import org.example.entity.User;
 
 public interface UserService {
@@ -10,5 +11,7 @@ public interface UserService {
 
     User findUserByIdInDatabase(String id);
 
-    void createUserFromRegistrationDto(RegistrationDto registrationDto);
+    void createUserFromRegistrationDto(RegisterDto registerDto);
+
+    void updateUserContactsById(String id, ContactsUpdateRequest updateRequest);
 }

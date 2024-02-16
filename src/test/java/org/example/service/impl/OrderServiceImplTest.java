@@ -1,7 +1,7 @@
 package org.example.service.impl;
 
 import org.example.dto.OrderDto;
-import org.example.dto.request.OrderCreationRequest;
+import org.example.dto.request.OrderCreateRequest;
 import org.example.entity.Order;
 import org.example.exception.OrderNotFoundException;
 import org.example.mapper.OrderMapper;
@@ -62,7 +62,7 @@ class OrderServiceImplTest {
 
     @ParameterizedTest
     @InstancioSource
-    void shouldCreateOrder(OrderCreationRequest request, Order order) {
+    void shouldCreateOrder(OrderCreateRequest request, Order order) {
         when(orderMapper.mapOrderCreationRequestToOrder(request))
                 .thenReturn(order);
 
