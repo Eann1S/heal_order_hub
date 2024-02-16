@@ -28,6 +28,12 @@
   </properties>
 
   <dependencies>
+    <!-- *** Kafka *** -->
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+    </dependency>
+
     <!-- *** Config processor *** -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -168,6 +174,10 @@
               <path>
                 <from>.idea</from>
                 <excludes>*.xml,**/*.xml</excludes>
+              </path>
+              <path>
+                <from>./</from>
+                <excludes>.env</excludes>
               </path>
             </paths>
           </extraDirectories>
